@@ -61,7 +61,7 @@ const clientsecret= "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"
 
 
 app.use(cors({
-    origin: ['https://kaleidoscopic-cucurucho-34b5c3.netlify.app/'], // Replace with your frontend domain
+    origin: ['https://ecommercebackend-6zsu.onrender.com'], // Replace with your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // Enable CORS credentials (cookies, authorization headers)
