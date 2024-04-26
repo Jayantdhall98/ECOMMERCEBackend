@@ -56,8 +56,8 @@ mongoose.connect(process.env.MONGO_URL).then(()=>console.log("DB Connection")).c
 
 
 
-const clientid="1086148459049-oesm6qbhed0o8enopvb0fevcgu18q6jn.apps.googleusercontent.com"
-const clientsecret= "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"
+const clientid= process.env.CLIENT_ID;
+const clientsecret= process.env.CLIENT_SECRET;
 
 
 app.use(cors({
@@ -123,8 +123,8 @@ passport.deserializeUser((user,done)=>{
 //initial google  auth login
 app.get('/google',passport.authenticate("google",{scope:["profile","email"]}))
 
-app.get("/google/callback",passport.authenticate("google",{successRedirect:"http://localhost:5173/products",
-failureRedirect:"http://localhost:5173/login"}))
+app.get("/google/callback",passport.authenticate("google",{successRedirect:`${process.env.BASE_URL}/products`,
+failureRedirect:`${process.env.BASE_URL}/login`}))
 
 
 
