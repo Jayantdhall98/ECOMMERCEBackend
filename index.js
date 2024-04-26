@@ -71,11 +71,12 @@ app.use(express.json());
 
 app.use(session({
     secret: "thisismysecrctekey",
-saveUninitialized:true,
+saveUninitialized:false,
 cookie: { maxAge: 1000 * 60 * 60 * 24 ,
-    sameSite:"none"
+   
    },
-resave: true
+resave: false
+
 }))
 // app.use(cookieParser());
 
