@@ -216,7 +216,9 @@ router.get("/destroy", async (req, res) => {
     }
 });
 
-
+router.get("/checkkk", async (req, res) => {
+    res.send("hanjiii");
+});
 
 
 
