@@ -56,8 +56,8 @@ mongoose.connect(process.env.MONGO_URL).then(()=>console.log("DB Connection")).c
 
 
 
-const clientid= process.env.CLIENT_ID;
-const clientsecret= process.env.CLIENT_SECRET;
+const clientid="1086148459049-oesm6qbhed0o8enopvb0fevcgu18q6jn.apps.googleusercontent.com"
+const clientsecret= "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"
 
 
 app.use(cors({
