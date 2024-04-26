@@ -15,7 +15,7 @@ const User = require('./models/User')
 const cookieParser = require("cookie-parser");
 
 
-// const cors=require("cors")
+const cors=require("cors")
 dotenv.config();
 
 // declare global {
@@ -60,13 +60,13 @@ const clientid="1086148459049-oesm6qbhed0o8enopvb0fevcgu18q6jn.apps.googleuserco
 const clientsecret= "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"
 
 
-// app.use(cors({
-//     origin: ['https://ecommercebackend-6zsu.onrender.com'], // Replace with your frontend domain
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true // Enable CORS credentials (cookies, authorization headers)
+app.use(cors({
+    origin: ['https://kaleidoscopic-cucurucho-34b5c3.netlify.app/'], // Replace with your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // Enable CORS credentials (cookies, authorization headers)
 
-// }));
+}));
 app.use(express.json());
 
 app.use(session({
