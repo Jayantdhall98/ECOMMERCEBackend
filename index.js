@@ -125,8 +125,8 @@ passport.deserializeUser((user,done)=>{
 //initial google  auth login
 app.get('/google',passport.authenticate("google",{scope:["profile","email"]}))
 
-app.get("/google/callback",passport.authenticate("google",{successRedirect:`${process.env.BASE_URL}/products`,
-failureRedirect:`${process.env.BASE_URL}/login`}))
+app.get("/google/callback",passport.authenticate("google",{successRedirect:`https://kaleidoscopic-cucurucho-34b5c3.netlify.app/products`,
+failureRedirect:`https://kaleidoscopic-cucurucho-34b5c3.netlify.app/login`}))
 
 
 
