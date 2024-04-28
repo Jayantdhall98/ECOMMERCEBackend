@@ -8,6 +8,7 @@ const productRoute=require("./routes/product")
 const cartRoute=require("./routes/cart")
 const orderRoute=require("./routes/order")
 const session = require("express-session");
+const MongoStore= require("connect-mongo");
 const passport= require('passport')
 const OAuth2Strategy=require('passport-google-oauth2').Strategy;
 const User = require('./models/User')
@@ -69,13 +70,30 @@ app.use(cors({
 }));
 app.use(express.json());
 
+
+//mongo db session
+const sessionStorage= MongoStore.create({
+    mongoUrl:process.env.MONGO_URL,
+    dbName:"test",
+    collectionName:"sessions",
+    ttl:14*24*60*60,
+    autoRemove:"native"
+})
+
+
+
+
+
+
 app.use(session({
-    secret: "thisismysecrctekey",
+    secret: process.env.SESSIONSECRETKEY,
 saveUninitialized:false,
 cookie: { maxAge: 1000 * 60 * 60 * 24 ,
    
    },
-resave: false
+resave: false,
+store:sessionStorage
+
 
 }))
 // app.use(cookieParser());
