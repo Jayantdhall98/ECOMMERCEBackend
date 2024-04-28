@@ -189,6 +189,8 @@ router.post("/register", async (req, res) => {
 // })
 router.get("/", (req, res) => {
     if (req.user && req.user._id) {
+      
+        console.log(req.user._id);
         return res.json({ value: true, usertype: req.user.usertype,username:req.user.username });
     } else if (req.session.userid) {
         return res.json({ value: true, usertype: req.session.usertype,username:req.session.username });
