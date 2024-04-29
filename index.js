@@ -69,6 +69,8 @@ app.use(cors({
 
 }));
 app.use(express.json());
+
+
 // Add middleware to include Access-Control-Allow-Credentials header
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
@@ -93,7 +95,8 @@ app.use(session({
     secret:"thisissecrettkeyy",
 saveUninitialized:false,
 cookie: { maxAge: 1000 * 60 * 60 * 24 ,
-   
+    secure: true, // Set secure attribute to true for HTTPS connection
+        sameSite: 'none' // Set SameSite attribute to None
    },
 resave: false,
 store:sessionStorage
