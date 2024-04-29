@@ -187,13 +187,22 @@ router.post("/register", async (req, res) => {
 //         return res.json({value:false,userid:"not authenticated"})
 //     }
 // })
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     if (req.user && req.user._id) {
-      
         console.log(req.user._id);
-        return res.json({ value: true, usertype: req.user.usertype,username:req.user.username });
+        return res.json({ value: true, usertype: req.user.usertype, username: req.user.username });
     } else if (req.session.userid) {
-        return res.json({ value: true, usertype: req.session.usertype,username:req.session.username });
+        // Retrieve session data from MongoDB session collection
+        try {
+            const sessionData = await sessionStorage.findOne({ "session.userId": req.session.userid });
+            if (sessionData) {
+                const userData = sessionData.session;
+                return res.json({ value: true, usertype: userData.usertype, username: userData.username });
+            }
+        } catch (error) {
+            console.error("Error retrieving session data:", error);
+            return res.status(500).json({ value: false, error: "Internal server error" });
+        }
     } else {
         return res.json({ value: false, userid: "not authenticated" });
     }
