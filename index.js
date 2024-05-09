@@ -92,7 +92,7 @@ app.use(session({
 saveUninitialized:false,
 cookie: { maxAge: 1000 * 60 * 60 * 24 ,
     secure: true, // Set secure attribute to true for HTTPS connection
-        sameSite: 'none' // Set SameSite attribute to None
+        // Set SameSite attribute to None
    },
 resave: false,
 store:sessionStorage

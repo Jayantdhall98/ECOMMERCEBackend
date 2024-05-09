@@ -188,25 +188,27 @@ router.post("/register", async (req, res) => {
 //     }
 // })
 router.get("/validate", async (req, res) => {
-    if (req.user && req.user._id) {
-        console.log(req.user._id);
-        return res.json({ value: true, usertype: req.user.usertype, username: req.user.username });
-    } else if (req.session.userid) {
-        // Retrieve session data from MongoDB session collection
-        try {
+    try {
+        if (req.session.userid) {
+            // Retrieve session data from MongoDB session store
             const sessionData = await sessionStorage.findOne({ "session.userId": req.session.userid });
             if (sessionData) {
                 const userData = sessionData.session;
                 return res.json({ value: true, usertype: userData.usertype, username: userData.username });
+            } else {
+                // Session data not found
+                return res.json({ value: false, error: "Session data not found" });
             }
-        } catch (error) {
-            console.error("Error retrieving session data:", error);
-            return res.status(500).json({ value: false, error: "Internal server error" });
+        } else {
+            // User not authenticated
+            return res.json({ value: false, userid: "not authenticated" });
         }
-    } else {
-        return res.json({ value: false, userid: "not authenticated" });
+    } catch (error) {
+        console.error("Error retrieving session data:", error);
+        return res.status(500).json({ value: false, error: "Internal server error" });
     }
 });
+
 //Destroy session
 
 // router.get("/destroy",async(req,res)=>{
@@ -250,6 +252,7 @@ router.post("/login", async (req, res) => {
             req.session.userid = user._id;
             req.session.usertype = user.usertype;
             req.session.username = user.username;
+          
 
             let message = { msg: "Welcome " + user.username, usertype: user.usertype };
             res.send(message);
