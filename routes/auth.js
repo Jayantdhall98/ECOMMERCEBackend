@@ -187,10 +187,13 @@ router.post("/register", async (req, res) => {
 //         return res.json({value:false,userid:"not authenticated"})
 //     }
 // })
-router.get("/validate", async (req, res) => {
-    try {
-        if (req.session.userid) {
-            // Retrieve session data from MongoDB session store
+router.get("/", async (req, res) => {
+    if (req.user && req.user._id) {
+        console.log(req.user._id);
+        return res.json({ value: true, usertype: req.user.usertype, username: req.user.username });
+    } else if (req.session.userid) {
+        // Retrieve session data from MongoDB session collection
+        try {
             const sessionData = await sessionStorage.findOne({ "session.userId": req.session.userid });
             if (sessionData) {
                 const userData = sessionData.session;
