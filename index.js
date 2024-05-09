@@ -60,19 +60,19 @@ mongoose.connect(process.env.MONGO_URL).then(()=>console.log("DB Connection")).c
 const clientid="1086148459049-oesm6qbhed0o8enopvb0fevcgu18q6jn.apps.googleusercontent.com"
 const clientsecret= "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"
 
+app.use(cors({
+    origin: ['https://kaleidoscopic-cucurucho-34b5c3.netlify.app'], // Replace with your frontend domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Enable CORS credentials (cookies, authorization headers)
+    
+}));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://kaleidoscopic-cucurucho-34b5c3.netlify.app'); // Set your client's domain here
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
-app.use(cors({
-    origin: ['https://kaleidoscopic-cucurucho-34b5c3.netlify.app'], // Replace with your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true // Enable CORS credentials (cookies, authorization headers)
-
-}));
 app.use(express.json());
 
 
