@@ -68,7 +68,7 @@ app.use(cors({
     
 }));
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://shopohollic.netlify.app/'); // Set your client's domain here
+    res.setHeader('Access-Control-Allow-Origin', 'https://shopohollic.netlify.app'); // Set your client's domain here
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
@@ -151,8 +151,8 @@ passport.deserializeUser((user,done)=>{
 //initial google  auth login
 app.get('/google',passport.authenticate("google",{scope:["profile","email"]}))
 
-app.get("/google/callback",passport.authenticate("google",{successRedirect:`https://shopohollic.netlify.app//products`,
-failureRedirect:`https://shopohollic.netlify.app//login`}))
+app.get("/google/callback",passport.authenticate("google",{successRedirect:`https://shopohollic.netlify.app/products`,
+failureRedirect:`https://shopohollic.netlify.app/login`}))
 
 
 
