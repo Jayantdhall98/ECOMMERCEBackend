@@ -187,7 +187,7 @@ router.post("/register", async (req, res) => {
 //         return res.json({value:false,userid:"not authenticated"})
 //     }
 // })
-router.get("/validate", async (req, res) => {
+router.get("/", async (req, res) => {
     console.log(req.user._id);
     console.log(req.session.userid);
     if (req.user && req.user._id) {
