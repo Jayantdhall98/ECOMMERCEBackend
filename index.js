@@ -71,11 +71,7 @@ app.use(cors({
 app.use(express.json());
 
 
-// Add middleware to include Access-Control-Allow-Credentials header
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-  });
+
 
 //mongo db session
 const sessionStorage= MongoStore.create({

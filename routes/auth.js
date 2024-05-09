@@ -187,9 +187,11 @@ router.post("/register", async (req, res) => {
 //         return res.json({value:false,userid:"not authenticated"})
 //     }
 // })
-router.get("/", async (req, res) => {
+router.get("/validate", async (req, res) => {
+    console.log(req.user._id);
+    console.log(req.user);
+   
     if (req.user && req.user._id) {
-        console.log(req.user._id);
         return res.json({ value: true, usertype: req.user.usertype, username: req.user.username });
     } else if (req.session.userid) {
         // Retrieve session data from MongoDB session collection
@@ -250,7 +252,7 @@ router.post("/login", async (req, res) => {
             req.session.userid = user._id;
             req.session.usertype = user.usertype;
             req.session.username = user.username;
-
+             
             let message = { msg: "Welcome " + user.username, usertype: user.usertype };
             res.send(message);
         } else {
