@@ -106,7 +106,7 @@ router.post("/sendverficationlink",async(req,res)=>{
             const emailsign=existEmail.emailsign;
         
                 // Assume your frontend is hosted at http://example.com
-                const verificationLink = `https://kaleidoscopic-cucurucho-34b5c3.netlify.app/verify/${emailsign}`;
+                const verificationLink = `https://shopohollic.netlify.app//verify/${emailsign}`;
                 sendVerificationEmail(email, verificationLink);
         } else {
             res.send("mail not existed or verified")
